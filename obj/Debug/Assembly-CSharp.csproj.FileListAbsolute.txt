@@ -1,0 +1,2 @@
+C:\projects\unity\ColorCollided\ColorCollided\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+C:\projects\unity\ColorCollided\ColorCollided\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache
