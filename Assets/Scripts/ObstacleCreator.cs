@@ -19,9 +19,15 @@ public class ObstacleCreator : MonoBehaviour
         float rowX = (ground.localScale.x - obstacleScale.x) / 2 * -1;
         float rowZ = (ground.localScale.z - obstacleScale.z) / 2 * -1;
         float andOfGround = ground.localScale.z / 2;
+        Vector3 finishLineScale = new Vector3(ground.localScale.x, 10, 2);
+        Debug.Log("X= " + ground.localScale.x.ToString() + "Y = " + ground.localScale.y.ToString() + "Z=" +ground.localScale.z.ToString());
+        Vector3 finishLinePosition = new Vector3(0, ground.localScale.y + (finishLineScale.y/2), ground.localScale.z/2 - finishLineScale.z);
+        Debug.Log(finishLinePosition);
+        createFinishLine(finishLinePosition, finishLineScale);
         Vector3 rowPosition = new Vector3(rowX, rowY, rowZ);
         int maximumRows = (int)((ground.localScale.z /  obstacleScale.z) / SpacesBetweenRowsZ);
         int maximumObstacleInRow = (int)(ground.localScale.x / obstacleScale.x) - 2;
+        maximumObstacleInRow = maximumObstacleInRow - 1; // minus the finish line object
         int x = 0;
         for ( int j = 0; j < maximumRows; j++)
         {
@@ -34,6 +40,21 @@ public class ObstacleCreator : MonoBehaviour
 
     }
     
+    void createFinishLine(Vector3 finishLinePosition, Vector3 finishLineScale)
+    {
+        GameObject obstacle = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        obstacle.tag = "Obstacle";
+        obstacle.name = "finishLine";
+        Renderer rend = obstacle.GetComponent<Renderer>();
+        rend.transform.localScale = finishLineScale;
+        rend.transform.position = finishLinePosition;
+        Rigidbody rb = obstacle.AddComponent<Rigidbody>();
+        rb.mass =999;
+        BoxCollider boxCollider = obstacle.AddComponent<BoxCollider>();
+        boxCollider.material.staticFriction = 99;
+        boxCollider.material.dynamicFriction = 99;
+    }
+
     void createRowOfObstacles(Vector3 rowPosition ,int num)
     {
         float chanceOfCreatingNewObstacle = 0.5f;// number between 0.0 to 1.0
