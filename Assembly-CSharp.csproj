@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Assets\EndTrigger.cs" />
     <Compile Include="Assets\GameManeger.cs" />
+    <Compile Include="Assets\LevelComplete.cs" />
     <Compile Include="Assets\Scripts\BlockSpawner.cs" />
     <Compile Include="Assets\Scripts\FollowPlayer.cs" />
     <Compile Include="Assets\Scripts\ObstacleCollision.cs" />
