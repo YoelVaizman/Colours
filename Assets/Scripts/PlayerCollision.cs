@@ -7,19 +7,32 @@ public class PlayerCollision : MonoBehaviour
     public Rigidbody rb;
     public Color[] colors = { Color.blue, new Color32(143, 0, 254, 1) };
     public Text text;
+    public GameManeger gameManeger;
+    public PlayerMovement playerMovement;
     public float impactForce = 250f;
     private int score = 0;
     private int bonus = 0;
     private List<string> alreadyCollided = new List<string>();
     private float pieceSize = 0.5f;
+    private float originalForwardForce ;
+    public float bonusSpeed = 50f;
+
+
+
 
     void Start()
     {
+        originalForwardForce = playerMovement.forwardForce;
         this.GetComponent<Renderer>().material.color = colors[Random.Range(0, colors.Length)];
         text.text = score.ToString();
     }
     void OnCollisionEnter(Collision collisionInfo)
     {
+        if (collisionInfo.collider.tag == "Finish")
+        {
+            Debug.Log("END GAME!");
+            gameManeger.EndGame();
+        }
         if (collisionInfo.collider.tag == "Obstacle")
         {
             Renderer rend = collisionInfo.gameObject.GetComponent<Renderer>();
@@ -36,6 +49,8 @@ public class PlayerCollision : MonoBehaviour
                     text.text = score.ToString();
                     this.GetComponent<Renderer>().material.color = colors[Random.Range(0, colors.Length)];
                     rb.AddForce(0, 0, impactForce);
+                    playerMovement.forwardForce = originalForwardForce + (bonus * bonusSpeed);
+                    Debug.Log(playerMovement.forwardForce);
                 }
             }
             else 
@@ -43,6 +58,7 @@ public class PlayerCollision : MonoBehaviour
                 if (newCollition(collisionInfo.collider.name))
                 {
                     bonus = 0;
+                    playerMovement.forwardForce = originalForwardForce;
                 }
             }
             
@@ -90,7 +106,7 @@ public class PlayerCollision : MonoBehaviour
         //Debug.Log(maxPieceInX);
         int maxPieceInY = (int)(scale.y / pieceSize);
         //Debug.Log(maxPieceInY);
-        int maxPieceInZ = (int)(scale.z / pieceSize);
+        int maxPieceInZ = (int)(scale.z / pieceSize) - 1;//minus finish line 
         //Debug.Log(maxPieceInZ);
 
         for (int x = 0 ; x < maxPieceInX; x++)

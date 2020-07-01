@@ -43,7 +43,7 @@ public class ObstacleCreator : MonoBehaviour
     void createFinishLine(Vector3 finishLinePosition, Vector3 finishLineScale)
     {
         GameObject obstacle = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        obstacle.tag = "Obstacle";
+        obstacle.tag = "Finish";
         obstacle.name = "finishLine";
         Renderer rend = obstacle.GetComponent<Renderer>();
         rend.transform.localScale = finishLineScale;
