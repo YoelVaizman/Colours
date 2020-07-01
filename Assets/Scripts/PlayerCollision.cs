@@ -7,8 +7,6 @@ public class PlayerCollision : MonoBehaviour
     public Rigidbody rb;
     public Color[] colors = { Color.blue, new Color32(143, 0, 254, 1) };
     public Text text;
-    public GameManeger gameManeger;
-    public PlayerMovement playerMovement;
     public float impactForce = 250f;
     private int score = 0;
     private int bonus = 0;
@@ -31,7 +29,8 @@ public class PlayerCollision : MonoBehaviour
         if (collisionInfo.collider.tag == "Finish")
         {
             Debug.Log("END GAME!");
-            gameManeger.EndGame();
+            FindObjectOfType<GameManeger>().EndGame();
+
         }
         if (collisionInfo.collider.tag == "Obstacle")
         {
