@@ -27,12 +27,7 @@ public class PlayerCollision : MonoBehaviour
     }
     void OnCollisionEnter(Collision collisionInfo)
     {
-        if (collisionInfo.collider.tag == "Finish")
-        {
-            Debug.Log("END GAME!");
-            FindObjectOfType<GameManeger>().EndGame();
-
-        }
+      
         if (collisionInfo.collider.tag == "Obstacle")
         {
             Renderer rend = collisionInfo.gameObject.GetComponent<Renderer>();
@@ -50,7 +45,7 @@ public class PlayerCollision : MonoBehaviour
                     this.GetComponent<Renderer>().material.color = colors[Random.Range(0, colors.Length)];
                     rb.AddForce(0, 0, impactForce);
                     playerMovement.forwardForce = originalForwardForce + (bonus * bonusSpeed);
-                    Debug.Log(playerMovement.forwardForce);
+                   
                 }
             }
             else 
