@@ -7,6 +7,7 @@ public class PlayerCollision : MonoBehaviour
     public Rigidbody rb;
     public Color[] colors = { Color.blue, new Color32(143, 0, 254, 1) };
     public Text text;
+    public PlayerMovement playerMovement;
     public float impactForce = 250f;
     private int score = 0;
     private int bonus = 0;
@@ -105,7 +106,7 @@ public class PlayerCollision : MonoBehaviour
         //Debug.Log(maxPieceInX);
         int maxPieceInY = (int)(scale.y / pieceSize);
         //Debug.Log(maxPieceInY);
-        int maxPieceInZ = (int)(scale.z / pieceSize) - 1;//minus finish line 
+        int maxPieceInZ = (int)(scale.z / pieceSize) ;
         //Debug.Log(maxPieceInZ);
 
         for (int x = 0 ; x < maxPieceInX; x++)

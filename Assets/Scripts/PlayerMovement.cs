@@ -27,6 +27,10 @@ public class PlayerMovement : MonoBehaviour
             rb.MovePosition(rb.position + Vector3.left * x);
             //rb.AddForce(-sidewaysForce * Time.fixedDeltaTime, 0, 0, ForceMode.VelocityChange);
         }
+        if (rb.position.y < -1f)
+        {
+            FindObjectOfType<GameManeger>().EndGame();
+        }
       
     }
 }

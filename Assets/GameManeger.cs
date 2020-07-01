@@ -1,22 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManeger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    bool gameHasEnded = false;
+    public float restartDelay = 1f;
+
+    public void completeLevel()
     {
-        
+        Debug.Log("WON LEVEL");
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void EndGame()
     {
-        Debug.Log("Game Over!");
+        if (!gameHasEnded)
+        {
+            gameHasEnded = true;
+            Debug.Log("Game Over!");
+            //Restart();
+            Invoke("Restart", restartDelay);
+        }
+    }
+    void Restart()
+    {
+        //SceneManager.LoadScene("level01");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
